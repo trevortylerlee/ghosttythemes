@@ -6,6 +6,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Introduction from "@/components/Introduction.astro";
 import Post from "@/components/Post.astro";
 import Project from "@/components/Project.astro";
+import ThemeEditor from "@/components/ThemeEditor";
 import SeoPage from "@/components/SeoPage.astro";
 
 const posts = (await getCollection("blog")).sort(
@@ -19,19 +20,6 @@ const projects = await getCollection("projects");
 <BaseLayout>
   <SeoPage slot="head" />
   <main>
-    <Introduction />
-    <hr class="my-8 border-[0.5px] opacity-50" />
-    <section class="prose dark:prose-invert">
-      <h2 class="">Blog posts</h2>
-      <ul class="grid list-none p-0">
-        {posts.map((post: CollectionEntry<"blog">) => <Post post={post} />)}
-      </ul>
-    </section>
-    <section class="prose mt-12 dark:prose-invert">
-      <h2>Projects</h2>
-      <ul class="list-none p-0">
-        {projects.map((project) => <Project project={project} />)}
-      </ul>
-    </section>
+    <ThemeEditor client:load />
   </main>
 </BaseLayout>
