@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import Project from "@/components/Project.astro";
+import SeoPage from "@/components/SeoPage.astro";
+
+const projects = await getCollection("projects");
+---
+
+<BaseLayout>
+  <SeoPage slot="head" title="Projects" />
+  <section class="prose dark:prose-invert">
+    <h2>Projects</h2>
+    <ul class="list-none p-0">
+      {projects.map((project) => <Project project={project} />)}
+    </ul>
+  </section>
+</BaseLayout>
